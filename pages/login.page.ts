@@ -1,5 +1,5 @@
 import { Page } from '@playwright/test';
-import { Logger } from '../utils/logger';
+import { Logger } from '../utils/logger';   
 
 export class LoginPage {
   readonly page: Page;
@@ -13,7 +13,7 @@ export class LoginPage {
 
   async navigate() {
     Logger.info('Navigating to login page');
-    await this.page.goto('https://example.com/login');
+    await this.page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
   }
 
   async login(username: string, password: string) {
