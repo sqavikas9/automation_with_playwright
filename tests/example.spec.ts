@@ -1,18 +1,17 @@
 import { test, expect } from '@playwright/test';
+import { LoginPage } from '../pages/login.page';
+import { Logger } from '../utils/logger';
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+test('should log in successfully', async ({ page }, testInfo) => {
+  const loginPage = new LoginPage(page);
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
+  Logger.step(testInfo, 'Starting test case for login');
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  await loginPage.navigate();
 
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
+  Logger.step(testInfo, 'Performing login action');
+  await loginPage.login('testuser', 'password123');
 
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+  Logger.step(testInfo, 'Verifying successful login');
+  await expect(page).toHaveURL(/dashboard/);
 });

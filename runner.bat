@@ -1,0 +1,1 @@
+call npx playwright test --reporter=line,allure-playwright
